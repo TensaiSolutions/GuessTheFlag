@@ -47,9 +47,7 @@ struct ContentView: View {
                             flagTapped(number)
                         } label: {
                             Image(countries[number])
-                                .renderingMode(.original)
-                                .clipShape(Capsule())
-                                .shadow(radius: 5)
+                                .flagImage()
                         }
                     }
                 }
@@ -97,6 +95,32 @@ struct ContentView: View {
         userScore = 0
         numberOfQuestions = 0
         askQuestion()
+    }
+}
+
+extension Image {
+    func flagImage() -> some View {
+        self
+            .renderingMode(.original)
+            .clipShape(Capsule())
+            .shadow(radius: 5)
+    }
+}
+
+//large Blue Font for Prominent Titles in a View
+struct BlueTitle: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .font(.largeTitle)
+            .foregroundColor(/*@START_MENU_TOKEN@*/.blue/*@END_MENU_TOKEN@*/)
+            .fontWeight(.bold)
+            .padding()
+
+    }
+}
+extension View {
+    func blueTitle() -> some View {
+        modifier(BlueTitle())
     }
 }
 
